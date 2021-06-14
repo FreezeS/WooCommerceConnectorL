@@ -497,7 +497,10 @@ def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=Non
     else:
         item_data["id"] = item.get("woocommerce_product_id")
         try:
-            put_request("products/{0}".format(item.get("woocommerce_product_id")), item_data)
+            answer = put_request("products/{0}".format(item.get("woocommerce_product_id")), item_data)
+            # if item was not updated on WooCommerce because it does not exist, create it
+            if 'code' in answer and answer['code'] == 'woocommerce_rest_product_invalid_id':
+                create_new_item_to_woocommerce(item, item_data, erp_item, variant_item_name_list)
 
         except requests.exceptions.HTTPError as e:
             if e.args[0] and (e.args[0].startswith("404") or e.args[0].startswith("400")):
