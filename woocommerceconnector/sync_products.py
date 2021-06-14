@@ -652,11 +652,6 @@ def get_price_and_stock_details(item, warehouse, price_list):
             "manage_stock": "True"
         })
 
-    #rlavaud Do I need this???
-    if item.woocommerce_variant_id:
-        item_price_and_quantity["id"] = item.woocommerce_variant_id
-
-
     return item_price_and_quantity
 
 def get_weight_in_grams(weight, weight_uom):
