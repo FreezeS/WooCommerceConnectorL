@@ -419,7 +419,7 @@ def get_erpnext_items(price_list):
 
     item_from_master = """select name, item_code, item_name, item_group,
         description, woocommerce_description, has_variants, variant_of, stock_uom, image, woocommerce_product_id,
-        woocommerce_variant_id, sync_qty_with_woocommerce, weight_per_unit, weight_uom from tabItem
+        woocommerce_variant_id, sync_qty_with_woocommerce, weight_per_unit, weight_uom, stock_keeping_unit from tabItem
         where sync_with_woocommerce=1 and (variant_of is null or variant_of = '')
         and (disabled is null or disabled = 0)  %s """ % last_sync_condition
 
